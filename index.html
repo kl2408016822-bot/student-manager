@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📘 Student Portal | My Information</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-container">
+  <div class="app-header">
+    <h1>Student Portal</h1>
+    <p>🔐 View your personal academic information</p>
+  </div>
+
+  <div class="selector-card">
+    <div class="selector-title">🔍 Find my record</div>
+    <div class="lookup-form">
+      <div class="input-group">
+        <label>👤 Select your name</label>
+        <select id="studentSelect">
+          <option value="">-- Choose a student --</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>🆔 Or enter Student ID</label>
+        <input type="text" id="studentIdInput" placeholder="e.g., S24001">
+      </div>
+      <button id="lookupBtn" class="btn-primary">📖 Show my info</button>
+    </div>
+  </div>
+
+  <div id="statusMsg" class="status-msg"></div>
+
+  <div class="profile-card" id="profileCard" style="display: none;">
+    <div class="card-header">
+      <span style="font-size: 1.8rem;">📄</span>
+      <h2>Student Information</h2>
+    </div>
+    <div class="student-details" id="studentDetails"></div>
+  </div>
+
+  <footer>📌 Data provided by the Student Management System</footer>
+</div>
+
+<script src="js/student-portal.js"></script>
+</body>
+</html>

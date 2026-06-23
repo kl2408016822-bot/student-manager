@@ -1,0 +1,270 @@
+/* frontend/css/style.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, 'Segoe UI', 'Inter', sans-serif;
+}
+
+body {
+  background: linear-gradient(145deg, #eef2f7 0%, #d9e0e8 100%);
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+}
+
+    /* ========== SAME DESIGN & THEME AS ADMIN PANEL ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, 'Roboto', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #eef2f7 0%, #d9e0e8 100%);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    .app-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .app-header {
+      background: #1e2a3e;
+      padding: 1.5rem 2rem;
+      color: white;
+      border-bottom: 4px solid #4f9da6;
+    }
+
+    .app-header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-header h1:before {
+      content: "👩‍🎓";
+      font-size: 2rem;
+    }
+
+    .app-header p {
+      opacity: 0.8;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    /* search / selector row */
+    .selector-card {
+      margin: 1.5rem 2rem 0 2rem;
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.8rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid #eef2ff;
+    }
+
+    .selector-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #1e2a3e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-left: 5px solid #4f9da6;
+      padding-left: 12px;
+    }
+
+    .lookup-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .input-group {
+      flex: 2;
+      min-width: 180px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+
+    .input-group select, .input-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cfdee9;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      background: white;
+      transition: 0.2s;
+    }
+
+    .input-group select:focus, .input-group input:focus {
+      outline: none;
+      border-color: #4f9da6;
+      box-shadow: 0 0 0 2px #bfe2e6;
+    }
+
+    button {
+      border: none;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .btn-primary {
+      background: #2c6e6e;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary:hover {
+      background: #1f5555;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: #cbd5e1;
+    }
+
+    /* profile card */
+    .profile-card {
+      margin: 1.5rem 2rem 2rem 2rem;
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      transition: all 0.2s;
+    }
+
+    .card-header {
+      background: #f8fafc;
+      padding: 1rem 1.8rem;
+      border-bottom: 2px solid #e2edf2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0f3b3f;
+    }
+
+    .student-details {
+      padding: 1.8rem;
+    }
+
+    .detail-row {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 12px 0;
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    .detail-label {
+      width: 140px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .detail-value {
+      flex: 1;
+      color: #1e2a3e;
+      font-weight: 500;
+    }
+
+    .grade-badge {
+      background: #e9f4f0;
+      color: #146b3a;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 60px;
+      display: inline-block;
+      font-size: 1rem;
+    }
+
+    .progress-bar-container {
+      margin-top: 10px;
+      background: #e2e8f0;
+      border-radius: 60px;
+      height: 10px;
+      width: 100%;
+      max-width: 300px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: #2c6e6e;
+      height: 100%;
+      width: 0%;
+      border-radius: 60px;
+      transition: width 0.4s ease;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2.5rem;
+      color: #6c7a91;
+      font-style: italic;
+    }
+
+    .status-msg {
+      margin: 1rem 2rem;
+      padding: 0.6rem 1rem;
+      background: #fef9e3;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      color: #92400e;
+      text-align: center;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.7rem;
+      padding: 1rem;
+      color: #5b6e8c;
+      border-top: 1px solid #e2edf2;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .detail-label {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+      .detail-row {
+        flex-direction: column;
+      }
+      .lookup-form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
