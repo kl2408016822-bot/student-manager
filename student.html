@@ -1,270 +1,381 @@
-/* frontend/css/style.css */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: system-ui, 'Segoe UI', 'Inter', sans-serif;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portal</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:system-ui,sans-serif;
 }
 
-body {
-  background: linear-gradient(145deg, #eef2f7 0%, #d9e0e8 100%);
-  min-height: 100vh;
-  padding: 2rem 1.5rem;
+body{
+background:linear-gradient(145deg,#eef2f7,#d9e0e8);
+min-height:100vh;
+padding:2rem;
 }
 
-    /* ========== SAME DESIGN & THEME AS ADMIN PANEL ========== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, 'Roboto', sans-serif;
-    }
+.app-container{
+max-width:900px;
+margin:auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
 
-    body {
-      background: linear-gradient(145deg, #eef2f7 0%, #d9e0e8 100%);
-      min-height: 100vh;
-      padding: 2rem 1.5rem;
-    }
+.app-header{
+background:#1e2a3e;
+color:white;
+padding:25px;
+text-align:center;
+}
 
-    .app-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(2px);
-      border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
-      overflow: hidden;
-      transition: all 0.2s;
-    }
+.app-header h1{
+font-size:2rem;
+margin-bottom:8px;
+}
 
-    .app-header {
-      background: #1e2a3e;
-      padding: 1.5rem 2rem;
-      color: white;
-      border-bottom: 4px solid #4f9da6;
-    }
+.lookup-card{
+padding:25px;
+}
 
-    .app-header h1 {
-      font-size: 1.9rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+.lookup-card h2{
+margin-bottom:15px;
+color:#1e2a3e;
+}
 
-    .app-header h1:before {
-      content: "👩‍🎓";
-      font-size: 2rem;
-    }
+.input-group{
+margin-bottom:15px;
+}
 
-    .app-header p {
-      opacity: 0.8;
-      margin-top: 8px;
-      font-size: 0.9rem;
-    }
+.input-group label{
+display:block;
+margin-bottom:5px;
+font-weight:600;
+}
 
-    /* search / selector row */
-    .selector-card {
-      margin: 1.5rem 2rem 0 2rem;
-      background: white;
-      border-radius: 1.5rem;
-      padding: 1.2rem 1.8rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      border: 1px solid #eef2ff;
-    }
+.input-group input,
+.input-group select{
+width:100%;
+padding:12px;
+border:1px solid #cbd5e1;
+border-radius:12px;
+font-size:15px;
+}
 
-    .selector-title {
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      color: #1e2a3e;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-left: 5px solid #4f9da6;
-      padding-left: 12px;
-    }
+.btn-primary{
+background:#2c6e6e;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:50px;
+cursor:pointer;
+font-weight:600;
+}
 
-    .lookup-form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: flex-end;
-    }
+.btn-primary:hover{
+background:#1f5555;
+}
 
-    .input-group {
-      flex: 2;
-      min-width: 180px;
-    }
+.profile-card{
+margin:20px;
+background:#f8fafc;
+padding:25px;
+border-radius:20px;
+display:none;
+}
 
-    .input-group label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: #475569;
-      margin-bottom: 4px;
-    }
+.profile-card h2{
+margin-bottom:15px;
+color:#1e2a3e;
+}
 
-    .input-group select, .input-group input {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #cfdee9;
-      border-radius: 14px;
-      font-size: 0.9rem;
-      background: white;
-      transition: 0.2s;
-    }
+.info-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+margin-bottom:10px;
+background:white;
+border-radius:12px;
+}
 
-    .input-group select:focus, .input-group input:focus {
-      outline: none;
-      border-color: #4f9da6;
-      box-shadow: 0 0 0 2px #bfe2e6;
-    }
+.info-label{
+font-weight:700;
+}
 
-    button {
-      border: none;
-      padding: 10px 24px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background: #f1f5f9;
-      color: #1e293b;
-    }
+.grade-badge{
+background:#dcfce7;
+padding:5px 12px;
+border-radius:20px;
+font-weight:700;
+}
 
-    .btn-primary {
-      background: #2c6e6e;
-      color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+.status{
+margin-top:15px;
+padding:10px;
+border-radius:10px;
+display:none;
+}
 
-    .btn-primary:hover {
-      background: #1f5555;
-      transform: translateY(-1px);
-    }
+.error{
+background:#fee2e2;
+color:#b91c1c;
+}
 
-    .btn-secondary {
-      background: #e2e8f0;
-    }
+.success{
+background:#dcfce7;
+color:#166534;
+}
 
-    .btn-secondary:hover {
-      background: #cbd5e1;
-    }
+footer{
+padding:15px;
+text-align:center;
+font-size:.8rem;
+color:#64748b;
+}
 
-    /* profile card */
-    .profile-card {
-      margin: 1.5rem 2rem 2rem 2rem;
-      background: white;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-      transition: all 0.2s;
-    }
+@media(max-width:768px){
 
-    .card-header {
-      background: #f8fafc;
-      padding: 1rem 1.8rem;
-      border-bottom: 2px solid #e2edf2;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.info-row{
+flex-direction:column;
+align-items:flex-start;
+gap:5px;
+}
 
-    .card-header h2 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #0f3b3f;
-    }
+}
+</style>
+</head>
 
-    .student-details {
-      padding: 1.8rem;
-    }
+<body>
 
-    .detail-row {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 12px 0;
-      border-bottom: 1px solid #edf2f7;
-    }
+<div class="app-container">
 
-    .detail-label {
-      width: 140px;
-      font-weight: 700;
-      color: #334155;
-    }
+<div class="app-header">
+<h1>🎓 Student Portal</h1>
+<p>View Your Academic Information</p>
+</div>
 
-    .detail-value {
-      flex: 1;
-      color: #1e2a3e;
-      font-weight: 500;
-    }
+<div class="lookup-card">
 
-    .grade-badge {
-      background: #e9f4f0;
-      color: #146b3a;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 60px;
-      display: inline-block;
-      font-size: 1rem;
-    }
+<h2>Search Student</h2>
 
-    .progress-bar-container {
-      margin-top: 10px;
-      background: #e2e8f0;
-      border-radius: 60px;
-      height: 10px;
-      width: 100%;
-      max-width: 300px;
-      overflow: hidden;
-    }
+<div class="input-group">
+<label>👤 Select Student Name</label>
+<select id="studentSelect">
+<option value="">-- Select Student Name --</option>
+</select>
+</div>
 
-    .progress-fill {
-      background: #2c6e6e;
-      height: 100%;
-      width: 0%;
-      border-radius: 60px;
-      transition: width 0.4s ease;
-    }
+<div class="input-group">
+<label>🆔 Select Student ID</label>
+<select id="studentIdSelect">
+<option value="">-- Select Student ID --</option>
+</select>
+</div>
 
-    .empty-state {
-      text-align: center;
-      padding: 2.5rem;
-      color: #6c7a91;
-      font-style: italic;
-    }
+<button class="btn-primary" id="searchBtn">
+🔍 Show Information
+</button>
 
-    .status-msg {
-      margin: 1rem 2rem;
-      padding: 0.6rem 1rem;
-      background: #fef9e3;
-      border-radius: 60px;
-      font-size: 0.8rem;
-      color: #92400e;
-      text-align: center;
-      display: none;
-    }
+<div id="statusMsg" class="status"></div>
 
-    footer {
-      text-align: center;
-      font-size: 0.7rem;
-      padding: 1rem;
-      color: #5b6e8c;
-      border-top: 1px solid #e2edf2;
-      margin-top: 0.5rem;
-    }
+</div>
 
-    @media (max-width: 640px) {
-      .detail-label {
-        width: 100%;
-        margin-bottom: 5px;
-      }
-      .detail-row {
-        flex-direction: column;
-      }
-      .lookup-form {
-        flex-direction: column;
-        align-items: stretch;
-      }
-    }
+<div class="profile-card" id="profileCard">
+
+<h2>📄 Student Information</h2>
+
+<div class="info-row">
+<span class="info-label">👤 Full Name</span>
+<span id="displayName"></span>
+</div>
+
+<div class="info-row">
+<span class="info-label">🆔 Student ID</span>
+<span id="displayStudentId"></span>
+</div>
+
+<div class="info-row">
+<span class="info-label">📧 Email</span>
+<span id="displayEmail"></span>
+</div>
+
+<div class="info-row">
+<span class="info-label">📊 Grade</span>
+<span class="grade-badge" id="displayGrade"></span>
+</div>
+
+</div>
+
+<footer>
+📁 Data loaded from Student Manager localStorage
+</footer>
+
+</div>
+
+<script>
+
+let students = [];
+
+const studentSelect = document.getElementById("studentSelect");
+const studentIdSelect = document.getElementById("studentIdSelect");
+const searchBtn = document.getElementById("searchBtn");
+const profileCard = document.getElementById("profileCard");
+const statusMsg = document.getElementById("statusMsg");
+
+function showMessage(message,isError=false){
+
+statusMsg.style.display="block";
+statusMsg.innerText=message;
+
+if(isError){
+statusMsg.className="status error";
+}else{
+statusMsg.className="status success";
+}
+
+setTimeout(()=>{
+statusMsg.style.display="none";
+},3000);
+
+}
+
+function loadStudents(){
+
+const stored =
+localStorage.getItem("studentManagerData");
+
+if(!stored){
+
+showMessage(
+"No student records found. Please add students in Student Manager.",
+true
+);
+
+return;
+}
+
+students = JSON.parse(stored);
+
+studentSelect.innerHTML =
+'<option value="">-- Select Student Name --</option>';
+
+studentIdSelect.innerHTML =
+'<option value="">-- Select Student ID --</option>';
+
+students.forEach(student=>{
+
+const nameOption =
+document.createElement("option");
+
+nameOption.value = student.studentId;
+nameOption.textContent = student.name;
+
+studentSelect.appendChild(nameOption);
+
+const idOption =
+document.createElement("option");
+
+idOption.value = student.studentId;
+idOption.textContent = student.studentId;
+
+studentIdSelect.appendChild(idOption);
+
+});
+
+}
+
+function displayStudent(student){
+
+profileCard.style.display = "block";
+
+document.getElementById("displayName").innerText =
+student.name;
+
+document.getElementById("displayStudentId").innerText =
+student.studentId;
+
+document.getElementById("displayEmail").innerText =
+student.email || "-";
+
+document.getElementById("displayGrade").innerText =
+student.grade + "%";
+
+}
+
+function searchStudent(){
+
+let selectedId = "";
+
+if(studentSelect.value){
+selectedId = studentSelect.value;
+}
+
+if(studentIdSelect.value){
+selectedId = studentIdSelect.value;
+}
+
+if(!selectedId){
+
+showMessage(
+"Please select a Student Name or Student ID.",
+true
+);
+
+return;
+}
+
+const student = students.find(
+s => s.studentId === selectedId
+);
+
+if(student){
+
+displayStudent(student);
+
+showMessage(
+"Student record found successfully."
+);
+
+}else{
+
+profileCard.style.display = "none";
+
+showMessage(
+"Student record not found.",
+true
+);
+
+}
+
+}
+
+studentSelect.addEventListener("change",()=>{
+
+studentIdSelect.value = studentSelect.value;
+
+});
+
+studentIdSelect.addEventListener("change",()=>{
+
+studentSelect.value = studentIdSelect.value;
+
+});
+
+searchBtn.addEventListener(
+"click",
+searchStudent
+);
+
+loadStudents();
+
+</script>
+
+</body>
+</html>
