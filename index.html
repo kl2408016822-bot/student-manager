@@ -2,46 +2,767 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>📘 Student Portal | My Information</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>📚 Student Manager | Mini App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #eef2f7 0%, #d9e0e8 100%);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    /* main container */
+    .app-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    /* header */
+    .app-header {
+      background: #1e2a3e;
+      padding: 1.5rem 2rem;
+      color: white;
+      border-bottom: 4px solid #4f9da6;
+    }
+
+    .app-header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-header h1:before {
+      content: "📋";
+      font-size: 2rem;
+    }
+
+    .app-header p {
+      opacity: 0.8;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    /* stats row */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      background: white;
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid #e2e8f0;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-card {
+      background: #f8fafc;
+      border-radius: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .stat-label {
+      font-weight: 600;
+      color: #334155;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #0f3b3f;
+      line-height: 1;
+    }
+
+    /* search & actions */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: #ffffffdd;
+      border-bottom: 1px solid #e9edf2;
+    }
+
+    .search-wrapper {
+      display: flex;
+      gap: 8px;
+      flex: 2;
+      min-width: 200px;
+    }
+
+    .search-wrapper input {
+      flex: 1;
+      padding: 10px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      background: white;
+      transition: 0.2s;
+    }
+
+    .search-wrapper input:focus {
+      outline: none;
+      border-color: #4f9da6;
+      box-shadow: 0 0 0 2px rgba(79,157,166,0.2);
+    }
+
+    .btn-clear {
+      background: #e2e8f0;
+      border: none;
+      padding: 0 18px;
+      border-radius: 60px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-clear:hover {
+      background: #cbd5e1;
+    }
+
+    /* form card */
+    .form-card {
+      margin: 1rem 2rem 1rem 2rem;
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.8rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid #eef2ff;
+    }
+
+    .form-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #1e2a3e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-left: 5px solid #4f9da6;
+      padding-left: 12px;
+    }
+
+    .form-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .input-group {
+      flex: 1;
+      min-width: 160px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cfdee9;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #4f9da6;
+      box-shadow: 0 0 0 2px #bfe2e6;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    button {
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .btn-primary {
+      background: #2c6e6e;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary:hover {
+      background: #1f5555;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: #cbd5e1;
+    }
+
+    .btn-danger {
+      background: #ffe4e2;
+      color: #b91c1c;
+    }
+
+    .btn-danger:hover {
+      background: #fecaca;
+    }
+
+    /* table container */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 0 1.5rem 1.8rem 1.5rem;
+      border-radius: 1.2rem;
+      background: white;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    }
+
+    .student-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .student-table th {
+      background: #f1f6f9;
+      padding: 14px 12px;
+      text-align: left;
+      font-weight: 700;
+      color: #1e2a3e;
+      border-bottom: 2px solid #dce5ec;
+    }
+
+    .student-table td {
+      padding: 12px 12px;
+      border-bottom: 1px solid #eef2f6;
+      vertical-align: middle;
+    }
+
+    .student-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .student-table tr:hover td {
+      background-color: #fefce8;
+    }
+
+    .badge-grade {
+      background: #e9f4f0;
+      color: #146b3a;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 60px;
+      display: inline-block;
+      font-size: 0.8rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .icon-btn {
+      background: transparent;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 40px;
+    }
+
+    .icon-btn.edit {
+      background: #e6f0fa;
+      color: #0369a1;
+    }
+    .icon-btn.edit:hover {
+      background: #bdd9f0;
+    }
+    .icon-btn.delete {
+      background: #ffefed;
+      color: #b91c1c;
+    }
+    .icon-btn.delete:hover {
+      background: #ffdbd8;
+    }
+
+    .empty-row td {
+      text-align: center;
+      padding: 2rem;
+      color: #6c7a91;
+      font-style: italic;
+    }
+
+    .status-msg {
+      margin: 0 2rem 1rem 2rem;
+      padding: 0.6rem 1rem;
+      background: #fef9e3;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      color: #92400e;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.7rem;
+      padding: 1rem;
+      color: #5b6e8c;
+      border-top: 1px solid #e2edf2;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 1rem;
+      }
+      .form-grid {
+        flex-direction: column;
+      }
+      .stats-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
 <div class="app-container">
   <div class="app-header">
-    <h1>Student Portal</h1>
-    <p>🔐 View your personal academic information</p>
+    <h1>Student Manager</h1>
+    <p>📌 Add, edit, search & manage student records — local storage keeps data safe</p>
   </div>
 
-  <div class="selector-card">
-    <div class="selector-title">🔍 Find my record</div>
-    <div class="lookup-form">
-      <div class="input-group">
-        <label>👤 Select your name</label>
-        <select id="studentSelect">
-          <option value="">-- Choose a student --</option>
-        </select>
-      </div>
-      <div class="input-group">
-        <label>🆔 Or enter Student ID</label>
-        <input type="text" id="studentIdInput" placeholder="e.g., S24001">
-      </div>
-      <button id="lookupBtn" class="btn-primary">📖 Show my info</button>
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-label">👩‍🎓 Total Students</span>
+      <span class="stat-value" id="totalStudentsCount">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">📊 Average Grade</span>
+      <span class="stat-value" id="avgGrade">—</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">⭐ Highest Grade</span>
+      <span class="stat-value" id="highestGrade">—</span>
     </div>
   </div>
 
-  <div id="statusMsg" class="status-msg"></div>
-
-  <div class="profile-card" id="profileCard" style="display: none;">
-    <div class="card-header">
-      <span style="font-size: 1.8rem;">📄</span>
-      <h2>Student Information</h2>
+  <div class="toolbar">
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="🔍 Search by name or student ID ..." autocomplete="off">
+      <button class="btn-clear" id="clearSearchBtn">✖ Clear</button>
     </div>
-    <div class="student-details" id="studentDetails"></div>
+    <div>
+      <button id="resetDemoBtn" class="btn-secondary" style="background:#eef2ff;">🔄 Reset demo data</button>
+    </div>
   </div>
 
-  <footer>📌 Data provided by the Student Management System</footer>
+  <!-- form for add/edit -->
+  <div class="form-card" id="formCard">
+    <div class="form-title">
+      <span>✏️</span> <span id="formModeLabel">Add New Student</span>
+    </div>
+    <div class="form-grid">
+      <div class="input-group">
+        <label>Full name *</label>
+        <input type="text" id="studentName" placeholder="e.g., Emma Watson" autocomplete="off">
+      </div>
+      <div class="input-group">
+        <label>Student ID * (unique)</label>
+        <input type="text" id="studentId" placeholder="e.g., S23001" autocomplete="off">
+      </div>
+      <div class="input-group">
+        <label>Email address</label>
+        <input type="email" id="studentEmail" placeholder="student@example.com">
+      </div>
+      <div class="input-group">
+        <label>Grade (%) *</label>
+        <input type="number" id="studentGrade" placeholder="0 - 100" step="any" min="0" max="100">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button id="submitBtn" class="btn-primary">➕ Add Student</button>
+      <button id="cancelEditBtn" class="btn-secondary" style="display: none;">✖ Cancel Edit</button>
+    </div>
+  </div>
+
+  <!-- student table -->
+  <div class="table-wrapper">
+    <table class="student-table" id="studentTable">
+      <thead>
+        <tr>
+          <th>#</th><th>Full Name</th><th>Student ID</th><th>Email</th><th>Grade (%)</th><th style="width:130px">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr class="empty-row"><td colspan="6">✨ No students found. Add your first student!</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="statusMsg" class="status-msg" style="display: none;"></div>
+  <footer>📁 Data stored in your browser (localStorage) — Reload keeps your changes</footer>
 </div>
+
+<script>
+  // ---------- DATA MODEL ----------
+  let students = [];         // each: { id (unique uuid), name, studentId, email, grade }
+  let currentEditId = null; // if not null -> we are in edit mode
+  let searchQuery = "";
+
+  // DOM elements
+  const studentNameInp = document.getElementById('studentName');
+  const studentIdInp = document.getElementById('studentId');
+  const studentEmailInp = document.getElementById('studentEmail');
+  const studentGradeInp = document.getElementById('studentGrade');
+  const submitBtn = document.getElementById('submitBtn');
+  const cancelEditBtn = document.getElementById('cancelEditBtn');
+  const formModeLabel = document.getElementById('formModeLabel');
+  const tableBody = document.getElementById('tableBody');
+  const totalSpan = document.getElementById('totalStudentsCount');
+  const avgSpan = document.getElementById('avgGrade');
+  const highestSpan = document.getElementById('highestGrade');
+  const searchInput = document.getElementById('searchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const resetDemoBtn = document.getElementById('resetDemoBtn');
+  const statusDiv = document.getElementById('statusMsg');
+
+  // Helper: show temporary message
+  function showMessage(msg, isError = false) {
+    statusDiv.style.display = 'block';
+    statusDiv.textContent = msg;
+    statusDiv.style.background = isError ? '#ffe6e5' : '#e0f2fe';
+    statusDiv.style.color = isError ? '#b91c1c' : '#0f3b3f';
+    setTimeout(() => {
+      if(statusDiv) statusDiv.style.display = 'none';
+    }, 2800);
+  }
+
+  // load from localStorage or init default data
+  function loadData() {
+    const stored = localStorage.getItem('studentManagerData');
+    if(stored) {
+      try {
+        students = JSON.parse(stored);
+        if(!Array.isArray(students)) students = [];
+      } catch(e) { students = []; }
+    }
+    if(!students || students.length === 0) {
+      // default seed data
+      students = [
+        { id: crypto.randomUUID ? crypto.randomUUID() : 'id1', name: 'Olivia Chen', studentId: 'S24001', email: 'olivia.chen@edu.com', grade: 92.5 },
+        { id: crypto.randomUUID ? crypto.randomUUID() : 'id2', name: 'Marcus Rivera', studentId: 'S24002', email: 'm.rivera@edu.com', grade: 78.3 },
+        { id: crypto.randomUUID ? crypto.randomUUID() : 'id3', name: 'Aisha Kapoor', studentId: 'S24003', email: 'aisha.k@edu.com', grade: 88.0 },
+        { id: crypto.randomUUID ? crypto.randomUUID() : 'id4', name: 'James Miller', studentId: 'S24004', email: 'jmiller@edu.com', grade: 65.5 },
+      ];
+    }
+    persistData();
+    renderTableAndStats();
+  }
+
+  function persistData() {
+    localStorage.setItem('studentManagerData', JSON.stringify(students));
+  }
+
+  // calculate stats
+  function updateStats() {
+    const total = students.length;
+    totalSpan.innerText = total;
+    if(total === 0) {
+      avgSpan.innerText = '—';
+      highestSpan.innerText = '—';
+      return;
+    }
+    let sum = 0, maxGrade = -Infinity;
+    for(let s of students) {
+      let g = typeof s.grade === 'number' ? s.grade : parseFloat(s.grade);
+      if(isNaN(g)) g = 0;
+      sum += g;
+      if(g > maxGrade) maxGrade = g;
+    }
+    let avg = (sum / total).toFixed(1);
+    avgSpan.innerText = avg + '%';
+    highestSpan.innerText = maxGrade.toFixed(1) + '%';
+  }
+
+  // filter students based on search query (name or studentId)
+  function getFilteredStudents() {
+    if(!searchQuery.trim()) return [...students];
+    const q = searchQuery.trim().toLowerCase();
+    return students.filter(s => s.name.toLowerCase().includes(q) || s.studentId.toLowerCase().includes(q));
+  }
+
+  // render table (only filtered)
+  function renderTableAndStats() {
+    updateStats();
+    const filtered = getFilteredStudents();
+    if(filtered.length === 0) {
+      tableBody.innerHTML = `<tr class="empty-row"><td colspan="6">🔎 No matching students — try different search or add new ✏️</td></tr>`;
+      return;
+    }
+    let html = '';
+    filtered.forEach((student, idx) => {
+      const gradeValue = typeof student.grade === 'number' ? student.grade : parseFloat(student.grade);
+      const gradeDisplay = !isNaN(gradeValue) ? gradeValue.toFixed(1) : '?';
+      html += `
+        <tr>
+          <td>${idx+1}</td>
+          <td><strong>${escapeHtml(student.name)}</strong></td>
+          <td>${escapeHtml(student.studentId)}</td>
+          <td>${escapeHtml(student.email || '—')}</td>
+          <td><span class="badge-grade">${gradeDisplay}%</span></td>
+          <td class="action-buttons">
+            <button class="icon-btn edit" data-id="${student.id}">✏️ Edit</button>
+            <button class="icon-btn delete" data-id="${student.id}">🗑 Delete</button>
+          </td>
+        </tr>
+      `;
+    });
+    tableBody.innerHTML = html;
+    // attach event listeners to edit/delete buttons dynamically
+    document.querySelectorAll('.icon-btn.edit').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        startEditStudent(id);
+      });
+    });
+    document.querySelectorAll('.icon-btn.delete').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        deleteStudentById(id);
+      });
+    });
+  }
+
+  // simple escape to avoid XSS
+  function escapeHtml(str) {
+    if(!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if(m === '&') return '&amp;';
+      if(m === '<') return '&lt;';
+      if(m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // check duplicate studentId (excluding current edit id)
+  function isStudentIdDuplicate(studentId, excludeId = null) {
+    return students.some(s => s.studentId === studentId && (excludeId === null || s.id !== excludeId));
+  }
+
+  // validation & collect data
+  function getFormData() {
+    const name = studentNameInp.value.trim();
+    const studentId = studentIdInp.value.trim();
+    const email = studentEmailInp.value.trim();
+    let grade = parseFloat(studentGradeInp.value);
+    if(isNaN(grade)) grade = null;
+    return { name, studentId, email, grade };
+  }
+
+  function validateForm(data, isEditMode = false, editId = null) {
+    if(!data.name) { showMessage("❌ Student name is required", true); return false; }
+    if(!data.studentId) { showMessage("❌ Student ID is required", true); return false; }
+    if(data.grade === null || isNaN(data.grade)) { showMessage("❌ Please enter a valid grade (0-100)", true); return false; }
+    if(data.grade < 0 || data.grade > 100) { showMessage("❌ Grade must be between 0 and 100", true); return false; }
+    // uniqueness check for studentId
+    const excludeId = isEditMode ? editId : null;
+    if(isStudentIdDuplicate(data.studentId, excludeId)) {
+      showMessage(`⚠️ Student ID "${data.studentId}" already exists. Use a unique ID.`, true);
+      return false;
+    }
+    // email optional but basic check if provided
+    if(data.email && !/^\S+@\S+\.\S+$/.test(data.email)) {
+      showMessage("📧 Please enter a valid email address (or leave empty)", true);
+      return false;
+    }
+    return true;
+  }
+
+  function resetForm() {
+    studentNameInp.value = '';
+    studentIdInp.value = '';
+    studentEmailInp.value = '';
+    studentGradeInp.value = '';
+    currentEditId = null;
+    submitBtn.innerText = '➕ Add Student';
+    formModeLabel.innerText = 'Add New Student';
+    cancelEditBtn.style.display = 'none';
+    // remove any highlighted background
+  }
+
+  // Add new student
+  function addStudent() {
+    const data = getFormData();
+    if(!validateForm(data, false, null)) return;
+    const newId = crypto.randomUUID ? crypto.randomUUID() : 'id_' + Date.now() + '_' + Math.random();
+    const newStudent = {
+      id: newId,
+      name: data.name,
+      studentId: data.studentId,
+      email: data.email || '',
+      grade: data.grade,
+    };
+    students.push(newStudent);
+    persistData();
+    resetForm();
+    renderTableAndStats();
+    showMessage(`✅ Student "${data.name}" added successfully!`);
+    // if search query was active, keep it; but render respects search
+  }
+
+  function startEditStudent(id) {
+    const student = students.find(s => s.id === id);
+    if(!student) return;
+    currentEditId = id;
+    studentNameInp.value = student.name;
+    studentIdInp.value = student.studentId;
+    studentEmailInp.value = student.email || '';
+    studentGradeInp.value = student.grade;
+    submitBtn.innerText = '✏️ Update Student';
+    formModeLabel.innerText = 'Edit Student';
+    cancelEditBtn.style.display = 'inline-block';
+    // scroll to form
+    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function updateStudent() {
+    if(!currentEditId) return;
+    const data = getFormData();
+    if(!validateForm(data, true, currentEditId)) return;
+    const index = students.findIndex(s => s.id === currentEditId);
+    if(index === -1) { showMessage("Student not found, refresh", true); resetForm(); renderTableAndStats(); return; }
+    students[index] = {
+      ...students[index],
+      name: data.name,
+      studentId: data.studentId,
+      email: data.email || '',
+      grade: data.grade,
+    };
+    persistData();
+    resetForm();
+    renderTableAndStats();
+    showMessage(`✏️ Student "${data.name}" updated successfully.`);
+  }
+
+  function deleteStudentById(id) {
+    const student = students.find(s => s.id === id);
+    if(!student) return;
+    const confirmDel = confirm(`Delete ${student.name} (ID: ${student.studentId}) ?`);
+    if(!confirmDel) return;
+    students = students.filter(s => s.id !== id);
+    persistData();
+    if(currentEditId === id) resetForm();
+    renderTableAndStats();
+    showMessage(`🗑 Removed "${student.name}" from records`);
+  }
+
+  // reset demo data (preserve existing confirmation)
+  function resetToDemoData() {
+    if(confirm("⚠️ This will replace all current student data with demo records. Your current data will be lost. Continue?")) {
+      students = [
+        { id: crypto.randomUUID ? crypto.randomUUID() : 'demo1', name: 'Sophia Williams', studentId: 'S24501', email: 'sophia.w@edu.com', grade: 94.2 },
+        { id: crypto.randomUUID ? crypto.randomUUID() : 'demo2', name: 'Liam Johnson', studentId: 'S24502', email: 'liam.j@edu.com', grade: 81.7 },
+        { id: crypto.randomUUID ? crypto.randomUUID() : 'demo3', name: 'Zara Ahmed', studentId: 'S24503', email: 'zara.ahmed@edu.com', grade: 76.5 },
+        { id: crypto.randomUUID ? crypto.randomUUID() : 'demo4', name: 'Ethan Park', studentId: 'S24504', email: 'ethan.park@edu.com', grade: 88.9 },
+      ];
+      persistData();
+      resetForm();
+      searchInput.value = '';
+      searchQuery = '';
+      renderTableAndStats();
+      showMessage("✨ Demo student data loaded successfully.");
+    }
+  }
+
+  // search event listener
+  function onSearchInput() {
+    searchQuery = searchInput.value;
+    renderTableAndStats();
+  }
+
+  function clearSearch() {
+    searchInput.value = '';
+    searchQuery = '';
+    renderTableAndStats();
+    showMessage("🔍 Search cleared");
+  }
+
+  // global submit handler (add or update)
+  function handleSubmit() {
+    if(currentEditId !== null) {
+      updateStudent();
+    } else {
+      addStudent();
+    }
+  }
+
+  function cancelEdit() {
+    resetForm();
+    renderTableAndStats(); // re-render only to clean potential highlight, anyway fine
+    showMessage("Edit cancelled");
+  }
+
+  // attach event listeners and init
+  function init() {
+    loadData();
+    submitBtn.addEventListener('click', handleSubmit);
+    cancelEditBtn.addEventListener('click', cancelEdit);
+    searchInput.addEventListener('input', onSearchInput);
+    clearSearchBtn.addEventListener('click', clearSearch);
+    resetDemoBtn.addEventListener('click', resetToDemoData);
+    // if click outside, not needed
+  }
+  init();
+</script>
+</body>
+</html>
 
 <script src="js/student-portal.js"></script>
 </body>
